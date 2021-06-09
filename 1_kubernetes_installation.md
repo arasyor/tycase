@@ -1,14 +1,19 @@
 # Updating system
+```
 yum update -y
 reboot
+```
 
 # Installing docker-ce
+```
 yum install -y yum-utils
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install -y docker-ce docker-ce-cli containerd.io
 systemctl enable --now docker
+```
 
 # Installing kubeadm, kubelet and kubectl
+```
 cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -22,5 +27,6 @@ EOF
 
 yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 systemctl enable --now kubelet
+```
 
 # Configuration master node
