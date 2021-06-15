@@ -15,7 +15,7 @@ systemctl enable --now docker
 
 ## Installing kubeadm, kubelet and kubectl
 ```
-cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
@@ -39,7 +39,7 @@ echo "192.168.6.41 k8smaster" >> /etc/hosts
 ```
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
-kubernetesVersion: 1.21.1
+kubernetesVersion: 1.21.1 # versiyon should be installed
 controlPlaneEndpoint: "k8smaster:6443"
 networking:
   podSubnet: 10.244.0.0/16
@@ -70,11 +70,3 @@ kubeadm join k8smaster:6443 --token l6i3ua.xj7lhkryigvzqvy4 \
 ```
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
-
-# 1.1 Prometheus Server Installation
-## Taint a node work prometheus only
-```
-kubectl taint node server-aras-yorganci-1 monitoring:PreferNoSchedule
-```
-
-## Run prometheus
