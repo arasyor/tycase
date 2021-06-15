@@ -40,7 +40,7 @@ kubernetes-ingress $HOME/kubernetes-ingress \
 ```
 cat prometheus-ingress.yaml
 
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -49,13 +49,16 @@ metadata:
   namespace: monitoring
 spec:
   rules:
-  - host: case-aras-yorganci.abc
+  - host: server-aras-yorganci-0
     http:
       paths:
       - backend:
-          serviceName: prometheus-server
-          servicePort: 80
-        path: /prometheus
+          service:
+            name: prometheus-server
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
 ```
 ```
 kubectl apply -f prometheus-ingress.yaml   

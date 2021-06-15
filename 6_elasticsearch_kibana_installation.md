@@ -87,3 +87,8 @@ diff filebeat-kubernetes.yaml filebeat-kubernetes-orig.yaml
 kubectl apply -f filebeat-kubernetes.yaml
 ```
 
+## Kibana dashboard config for kubernetes logs
+```
+Stack Management -> Index Patterns -> filebeat-*
+```
+

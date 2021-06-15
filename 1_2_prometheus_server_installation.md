@@ -38,10 +38,6 @@ diff values.yaml values-orig.yaml
 <     enabled: false
 ---
 >     enabled: true
-425c425
-<   enabled: false
----
->   enabled: true
 792,795c792,796
 <   tolerations:
 <     - key: "monitoring"
