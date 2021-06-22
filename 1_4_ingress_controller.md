@@ -49,8 +49,7 @@ metadata:
   namespace: monitoring
 spec:
   rules:
-  - host: server-aras-yorganci-0
-    http:
+  - http:
       paths:
       - backend:
           service:
