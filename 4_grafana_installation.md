@@ -28,7 +28,7 @@ echo "192.168.6.41    server-aras-yorganci-0  server-aras-yorganci-0" >> /etc/ho
 Configuration -> Add data source -> Prometheus -> URL http://server-aras-yorganci-0
 ```
 
-## Add grafana dashboard for k8s cluster monitoring
+## Add grafana dashboard for k8s pod monitoring
 ```
 Dashboards -> Manage -> Import -> Dashboard ID 10000 Load
 https://grafana.com/grafana/dashboards/10000
