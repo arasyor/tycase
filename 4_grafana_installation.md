@@ -30,6 +30,5 @@ Configuration -> Add data source -> Prometheus -> URL http://server-aras-yorganc
 
 ## Add grafana dashboard for k8s pod monitoring
 ```
-Dashboards -> Manage -> Import -> Dashboard ID 10000 Load
-https://grafana.com/grafana/dashboards/10000
+Dashboards -> Manage -> Import -> Upload JSON file -> 4_grafana_dashboard.json
 ```
