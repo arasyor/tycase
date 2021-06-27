@@ -28,3 +28,21 @@ diff /etc/consul.d/consul.hcl{,.orig}
 
 systemctl enable --now consul
 ```
+
+## Consul service registration for prometheus
+```
+cat <<EOF | tee /etc/consul.d/prometheus-server-0.json
+{
+  "service": {
+    "address": "server-aras-yorganci-0",
+    "name": "prometheus-server-0",
+    "tags": [
+      "prometheus-server-0"
+    ],
+    "port": 80
+  }
+}
+EOF
+
+consul reload
+```
