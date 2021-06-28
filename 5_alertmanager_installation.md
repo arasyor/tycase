@@ -14,7 +14,7 @@ nohup ./alertmanager &
 ```
 cd $HOME/prometheus-2.28.0.linux-amd64
 
-cat<<EOF | tee server-0-k8s.rules
+cat <<EOF | tee server-0-k8s.rules
 groups:
 - name: Pod Alerts
   rules:

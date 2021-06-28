@@ -66,3 +66,53 @@ chmod 600 $HOME/.ssh/Tycase.pem
 ```
 echo "192.168.6.43    server-aras-yorganci-3  server-aras-yorganci-3" >> /etc/hosts
 ```
+
+## Gitlab pipeline script below
+```
+cat .gitlab-ci.yml
+
+variables:
+  K8S_CLUSTER: "server-11"
+
+stages:
+  - prometheus-consul-registry
+  - alertmanager-pod-restart
+
+consul-job:       
+  stage: prometheus-consul-registry
+  script:
+    - |
+      cat <<EOF | tee /etc/consul.d/prometheus-$K8S_CLUSTER.json
+      {
+        "service": {
+        "address": "$K8S_CLUSTER",
+        "name": "prometheus-$K8S_CLUSTER",
+        "tags": [
+          "prometheus-$K8S_CLUSTER"
+        ],
+        "port": 80
+        }
+      }
+      EOF
+    - consul reload
+
+alertmanager-job:
+  stage: alertmanager-pod-restart
+  script:
+    - cd $HOME/prometheus-2.28.0.linux-amd64
+    - |
+      cat <<EOF | tee $K8S_CLUSTER-k8s.rules
+      groups:
+      - name: Pod Alerts - $K8S_CLUSTER
+        rules:
+        - alert: Pod Restart Alert - $K8S_CLUSTER
+          expr: rate(kube_pod_container_status_restarts_total[1h]) * 3600 > 1
+          for: 1m
+          labels:
+            severity: "critical"
+          annotations:
+            summary: "Pod {{$labels.namespace}}/{{$labels.pod}} restarting more than once during last one hours."
+      EOF
+    - curl -X POST http://localhost:9090/-/reload
+```
+Pipeline can be accessed from http://server-aras-yorganci-3/root/tycase/-/pipelines with K8S_CLUSTER parameter for cluster address.
