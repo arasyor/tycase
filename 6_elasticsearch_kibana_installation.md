@@ -91,4 +91,4 @@ kubectl apply -f filebeat-kubernetes.yaml
 ```
 Stack Management -> Index Patterns -> filebeat-*
 ```
-
+Kibana can be accessed from http://server-aras-yorganci-3:5601

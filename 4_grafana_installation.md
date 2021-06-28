@@ -32,3 +32,4 @@ Configuration -> Add data source -> Prometheus -> URL http://server-aras-yorganc
 ```
 Dashboards -> Manage -> Import -> Upload JSON file -> 4_grafana_dashboard.json
 ```
+Grafana dashboard can be accessed from http://server-aras-yorganci-2:3000
