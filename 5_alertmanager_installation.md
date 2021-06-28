@@ -32,3 +32,4 @@ EOF
 ```
 curl -X POST http://localhost:9090/-/reload
 ```
+Fired alerts can be accessed from http://server-aras-yorganci-2:9093/#/alerts

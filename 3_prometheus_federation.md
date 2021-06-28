@@ -44,3 +44,4 @@ EOF
 ```
 nohup ./prometheus --web.enable-lifecycle &
 ```
+Federated prometheus list can be accessed from http://server-aras-yorganci-2:9090/targets
