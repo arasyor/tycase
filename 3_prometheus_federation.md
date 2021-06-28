@@ -21,12 +21,10 @@ scrape_configs:
 
     params:
       'match[]':
-        - '{job="prometheus"}'
-        - '{__name__=~"job:.*"}'
+        - '{job=~".+"}'
 
     consul_sd_configs:
     - server: server-aras-yorganci-2:8500
-      services: [prometheus-server-0]
 ```
 
 ## Run prometheus server
