@@ -16,3 +16,53 @@ Username: root
 Password stored to /etc/gitlab/initial_root_password. This file will be cleaned up in first reconfigure run after 24 hours.
 ```
 
+## Install Gitlab runner and register for server-2
+Registritation code can be obtained from http://server-aras-yorganci-3/root/tycase/-/settings/ci_cd#js-runners-settings
+```
+curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh" | sudo bash
+
+yum install -y gitlab-runner
+
+gitlab-runner register
+
+Runtime platform                                    arch=amd64 os=linux pid=18712 revision=c1edb478 version=14.0.1
+Running in system-mode.
+
+Enter the GitLab instance URL (for example, https://gitlab.com/):
+http://server-aras-yorganci-3/
+Enter the registration token:
+37fGG9UQJPqpJFp52gUr
+Enter a description for the runner:
+[server-aras-yorganci-3]:
+Enter tags for the runner (comma-separated):
+
+Registering runner... succeeded                     runner=37fGG9UQ
+Enter an executor: docker, shell, docker+machine, docker-ssh+machine, custom, docker-ssh, parallels, ssh, virtualbox, kubernetes:
+ssh
+Enter the SSH server address (for example, my.server.com):
+server-aras-yorganci-2
+Enter the SSH server port (for example, 22):
+22
+Enter the SSH user (for example, root):
+root
+Enter the SSH password (for example, docker.io):
+docker.io
+Enter the path to the SSH identity file (for example, /home/user/.ssh/id_rsa):
+/root/.ssh/Tycase.pem
+Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
+```
+
+## Server-2 IP and private key should be on server-3
+```
+echo "192.168.6.44    server-aras-yorganci-2  server-aras-yorganci-2" >> /etc/hosts
+
+ls -l $HOME/.ssh/Tycase.pem
+-rw------- 1 root root 1679 Jun 29 03:09 /root/.ssh/Tycase.pem
+
+chmod 600 $HOME/.ssh/Tycase.pem
+```
+
+## Server-3 IP should be on server-2
+```
+echo "192.168.6.43    server-aras-yorganci-3  server-aras-yorganci-3" >> /etc/hosts
+```
