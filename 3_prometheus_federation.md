@@ -10,7 +10,19 @@ tar -xf prometheus-2.28.0.linux-amd64.tar.gz
 cd $HOME/prometheus-2.28.0.linux-amd64
 cp -a prometheus{.yml,-orig.yml}
 
-cat prometheus.yml
+cat <<EOF | tee prometheus.yml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+       - localhost:9093
+
+rule_files:
+  - ./*-k8s.rules
 
 scrape_configs:
   - job_name: 'federate'
@@ -25,9 +37,10 @@ scrape_configs:
 
     consul_sd_configs:
     - server: server-aras-yorganci-2:8500
+EOF
 ```
 
-## Run prometheus server
+## Run prometheus server with lifecycle
 ```
-nohup ./prometheus &
+nohup ./prometheus --web.enable-lifecycle &
 ```
