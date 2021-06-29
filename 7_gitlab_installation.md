@@ -9,11 +9,13 @@ yum -y install gitlab-ce
 gitlab-ctl reconfigure 
 ```
 
-## Default user and password
+## Default root user and password
 ```
 Default admin account has been configured with following details:
 Username: root
 Password stored to /etc/gitlab/initial_root_password. This file will be cleaned up in first reconfigure run after 24 hours.
+
+Password: ls6O4kP/mV3wPdlsk42ILwi/agLEqui9NOGCcTiHLAI=
 ```
 
 ## Install Gitlab runner and register for server-2
